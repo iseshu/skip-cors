@@ -2,6 +2,9 @@ import requests
 from flask import *
 from flask_cors import CORS
 
+proxies = {"https": "https://49.0.2.242:8090",
+		  "http": "http://49.0.2.242:8090"}
+
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 @app.route('/')
@@ -17,6 +20,13 @@ def coe():
     url = request.args.get('url')
     req = requests.get(url).content
     return req
+
+@app.route('/proxy',methods=['GET','POST'])
+def coe():
+    url = request.args.get('url')
+    req = requests.get(url,proxies=proxies).content
+    return req
+
 
 
 @app.route('/ibomma',methods=['GET','POST'])

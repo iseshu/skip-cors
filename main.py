@@ -22,7 +22,7 @@ def coe():
     return req
 
 @app.route('/proxy',methods=['GET','POST'])
-def coe():
+def cop():
     url = request.args.get('url')
     req = requests.get(url,proxies=proxies).content
     return req
